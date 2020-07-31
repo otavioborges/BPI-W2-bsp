@@ -2785,6 +2785,38 @@ enum nl80211_mpath_info {
 };
 
 /**
+ * enum nl80211_band_iftype_attr - Interface type data attributes
+ *
+ * @__NL80211_BAND_IFTYPE_ATTR_INVALID: attribute number 0 is reserved
+ * @NL80211_BAND_IFTYPE_ATTR_IFTYPES: nested attribute containing a flag attribute
+ *     for each interface type that supports the band data
+ * @NL80211_BAND_IFTYPE_ATTR_HE_CAP_MAC: HE MAC capabilities as in HE
+ *     capabilities IE
+ * @NL80211_BAND_IFTYPE_ATTR_HE_CAP_PHY: HE PHY capabilities as in HE
+ *     capabilities IE
+ * @NL80211_BAND_IFTYPE_ATTR_HE_CAP_MCS_SET: HE supported NSS/MCS as in HE
+ *     capabilities IE
+ * @NL80211_BAND_IFTYPE_ATTR_HE_CAP_PPE: HE PPE thresholds information as
+ *     defined in HE capabilities IE
+ * @NL80211_BAND_IFTYPE_ATTR_MAX: highest band HE capability attribute currently
+ *     defined
+ * @__NL80211_BAND_IFTYPE_ATTR_AFTER_LAST: internal use
+ */
+enum nl80211_band_iftype_attr {
+	__NL80211_BAND_IFTYPE_ATTR_INVALID,
+
+	NL80211_BAND_IFTYPE_ATTR_IFTYPES,
+	NL80211_BAND_IFTYPE_ATTR_HE_CAP_MAC,
+	NL80211_BAND_IFTYPE_ATTR_HE_CAP_PHY,
+	NL80211_BAND_IFTYPE_ATTR_HE_CAP_MCS_SET,
+	NL80211_BAND_IFTYPE_ATTR_HE_CAP_PPE,
+
+	/* keep last */
+	__NL80211_BAND_IFTYPE_ATTR_AFTER_LAST,
+	NL80211_BAND_IFTYPE_ATTR_MAX = __NL80211_BAND_IFTYPE_ATTR_AFTER_LAST - 1
+};
+
+/**
  * enum nl80211_band_attr - band attributes
  * @__NL80211_BAND_ATTR_INVALID: attribute number 0 is reserved
  * @NL80211_BAND_ATTR_FREQS: supported frequencies in this band,

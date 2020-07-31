@@ -701,10 +701,8 @@ static void iwl_dbg_tlv_send_hcmds(struct iwl_fw_runtime *fwrt,
 	}
 }
 
-static void iwl_dbg_tlv_periodic_trig_handler(struct timer_list *t)
+static void iwl_dbg_tlv_periodic_trig_handler(struct iwl_dbg_tlv_timer_node *timer_node)
 {
-	struct iwl_dbg_tlv_timer_node *timer_node =
-		from_timer(timer_node, t, timer);
 	struct iwl_fwrt_dump_data dump_data = {
 		.trig = (void *)timer_node->tlv->data,
 	};
@@ -765,8 +763,8 @@ static void iwl_dbg_tlv_set_periodic_trigs(struct iwl_fw_runtime *fwrt)
 
 		timer_node->fwrt = fwrt;
 		timer_node->tlv = &node->tlv;
-		timer_setup(&timer_node->timer,
-			    iwl_dbg_tlv_periodic_trig_handler, 0);
+		setup_timer(&timer_node->timer,
+			    (void (*)(unsigned long))iwl_dbg_tlv_periodic_trig_handler, (unsigned long)timer_node);
 
 		list_add_tail(&timer_node->list,
 			      &fwrt->trans->dbg.periodic_trig_list);
